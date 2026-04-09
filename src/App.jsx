@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -6,7 +6,6 @@ import Home from './Pages/Home'
 import Contact from './Pages/Contact'
 import Cart from './Pages/Cart'
 import Footer from './components/Footer'
-import { UpdateFollower } from 'react-mouse-follower'
 import ProductList from './components/ProductList'
 import Navbar2 from './components/Navbar2'
 import SingleProduct from './components/SingleProduct'
@@ -40,30 +39,49 @@ const router = createBrowserRouter([
     path:'/cart',
     element: <><Navbar2/><Cart/><Footer/></>
   },
- 
 ])
 
 const App = () => {
+
+  // 🔥 CURSOR PERSONALIZADO
+  useEffect(() => {
+    const cursor = document.querySelector('.cursor')
+    const dot = document.querySelector('.cursor-dot')
+
+    const move = (e) => {
+      if (cursor && dot) {
+        cursor.style.top = e.clientY + 'px'
+        cursor.style.left = e.clientX + 'px'
+        dot.style.top = e.clientY + 'px'
+        dot.style.left = e.clientX + 'px'
+      }
+    }
+
+    document.addEventListener('mousemove', move)
+
+    return () => document.removeEventListener('mousemove', move)
+  }, [])
+
   return (
     <main className='overflow-x-hidden min-h-screen w-full font-sans relative'>
-      {/* Dark Background Layer */}
+
+      {/* 🔥 CURSOR */}
+      <div className="cursor"></div>
+      <div className="cursor-dot"></div>
+
+      {/* 🌌 Fondo */}
       <div
         className="fixed inset-0 z-0"
         style={{
           background: "radial-gradient(125% 125% at 50% 10%, #000000 40%, #0d1a36 100%)",
         }}
       />
+
+      {/* 📦 Contenido */}
       <div className='relative z-10'>
-        <UpdateFollower
-        mouseOptions={{
-          backgroundColor: "white",
-          zIndex: 10,
-          followSpeed: 1.5,
-        }}
-        >
-       <RouterProvider router={router}/>
-       </UpdateFollower>
+        <RouterProvider router={router}/>
       </div>
+
     </main>
   )
 }

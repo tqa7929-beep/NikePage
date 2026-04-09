@@ -345,4 +345,48 @@
     -webkit-text-fill-color: transparent;
     font-weight: 700;
   }
+
+ /* 🔥 Cursor moderno visible */
+body {
+  cursor: none;
 }
+
+/* Círculo externo */
+.cursor {
+  position: fixed;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #3b82f6;
+  background: rgba(59, 130, 246, 0.2); /* 👈 FONDO AZUL */
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, background 0.2s;
+  z-index: 9999;
+
+  /* 👇 EFECTO GLOW */
+  box-shadow: 0 0 10px #3b82f6, 0 0 20px #3b82f6;
+}
+
+/* Punto interno */
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #ffffff; /* 👈 BLANCO PARA CONTRASTE */
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+
+  box-shadow: 0 0 5px #fff;
+}
+
+/* Hover efecto */
+.cursor.hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  background: rgba(59, 130, 246, 0.4);
+}
+
+}
+
